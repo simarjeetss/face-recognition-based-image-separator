@@ -1,10 +1,11 @@
-import os
-import cv2
-import pickle
-import numpy as np
-import face_recognition
-from typing import List, Tuple, Dict, Optional
 import logging
+import os
+import pickle
+from typing import List, Tuple, Optional
+
+import cv2
+import face_recognition
+import numpy as np
 
 # logging
 logging.basicConfig(
@@ -12,6 +13,17 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+"""
+    METHODS:
+    1. save_encodings
+    2. read_encodings
+    3. create_encodings
+    4. compare_face_encodings
+    5. save_image
+    6. process_known_people
+    7. process_dataset
+"""
 
 
 class FaceRecognitionSeparator:
@@ -141,6 +153,7 @@ class FaceRecognitionSeparator:
                 logger.error(f"Error processing {img_path}: {str(e)}")
                 continue
 
+        #checks if known_encodings.pickle is empty or not
         if known_encodings:
             self.save_encodings(known_encodings, known_names, output_pickle)
         else:
